@@ -8,6 +8,8 @@
 
 **Step 4:** Start Metro Bundler `yarn start`
 
-**Step 5:** Start Metro Bundler `yarn android`
+**Step 5:** Open Android emulator
 
-**Step 6:** Turn on/off airplane mode to examine network request
+**Step 6:** Run a release build on the emulator  `yarn android:release`
+
+**Step 7:** Turn on/off airplane mode to examine network request
