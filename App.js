@@ -48,7 +48,7 @@ const App: () => React$Node = () => {
           request.abort();
           timeout=null;
           reject('bad');
-      },10000);
+      },9000);
 
       request.onreadystatechange = function () {
 
@@ -111,14 +111,14 @@ const App: () => React$Node = () => {
           if (!state.isInternetReachable) {
             setNetworkQuality('Disconnected')
             request.abort();
-            //addMessage('#'+ id+ ' aborted');
+            addMessage('#'+ id+ ' error due to *disconnected*');
 
           }else {
             checkNetworkQuality().then(()=> setNetworkQuality('Good')).catch((error)=> {
                 //bad network
                 setNetworkQuality('Bad')
                 request.abort();
-                addMessage('#'+ id+ ' error - *'+error+'* network');
+                addMessage('#'+ id+ ' error due to *'+error+'* network');
             });
           
           }
@@ -180,7 +180,7 @@ const App: () => React$Node = () => {
               <Text>Type: {netInfo.type}</Text>
               <Text>Is Connected? {netInfo.isConnected.toString()}</Text>
               <Text>Is Internet Reachable? {netInfo.isInternetReachable.toString()}</Text>
-              <Text>Network Quality: {networkQuality}</Text>
+              <Text style={styles[`network${networkQuality}`]} >Network Quality: {networkQuality}</Text>
               {/*<Button
               title="Start Request"
                 onPress={singleRequest}
@@ -200,6 +200,15 @@ const App: () => React$Node = () => {
 };
 
 const styles = StyleSheet.create({
+  networkGood: {
+    color: 'green'
+  },
+  networkBad: {
+    color: 'red'
+  },
+  networkDisconnected: {
+    color: 'blue'
+  },  
   scrollView: {
     backgroundColor: Colors.lighter,
   },
